@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE | CRUD </title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" th:href="@{/admin/plugins/fontawesome-free/css/all.min.css}">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/admin/dist/css/adminlte.min.css}">
+</head>
+<body class="hold-transition sidebar-mini">
+<div th:replace="~{/admin/layout/header:: wrapper}"></div>
+<div class="content">
+
+    <form th:action="@{saveUsers}" method="post">
+        <p>UserName:</p>
+        <p><input type="text" name="username"></p>
+        <p>PassWord:</p>
+        <p><input type="text" name="password"></p>
+        <p>FullName</p>
+        <p><input type="text" name="fullname"></p>
+        <button type="submit"class="btn btn-success">Add</button>
+    </form>
+    <div class="product-list">
+    <table class="table">
+        <thead>
+        <tr class="table-secondary">
+            <th>ID</th>
+            <th>UserName</th>
+            <th>PassWord</th>
+            <th>FullName</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="users : ${list}">
+                <td th:text="${users.id}"></td>
+                <td th:text="${users.username}"></td>
+                <td th:text="${users.password}"></td>
+                <td th:text="${users.fullname}"></td>
+                <td>
+                    <a th:href="@{/edit/{id}(id=${users.id})}" class="btn btn-success">Edit</a>
+                    <a th:href="@{/deleteUsers?id={id}(id=${users.id})}" class="btn btn-danger">Delete</a>
+                </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<div th:replace="~{/admin/layout/footer:: footer}"></div>
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE -->
+<script th:src="@{/admin/dist/js/adminlte.js}"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script th:src="@{/admin/plugins/chart.js/Chart.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/admin/dist/js/demo.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script th:src="@{/admin/dist/js/pages/dashboard3.js}"></script>
+</body>
+</html>

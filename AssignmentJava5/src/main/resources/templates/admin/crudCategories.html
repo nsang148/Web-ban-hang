@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE | Dashboard </title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" th:href="@{/admin/plugins/fontawesome-free/css/all.min.css}">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/admin/dist/css/adminlte.min.css}">
+</head>
+<body class="hold-transition sidebar-mini">
+<div th:replace="~{/admin/layout/header:: wrapper}"></div>
+<div class="content">
+
+    <form th:action="@{saveCate}" method="post">
+        <p>Category Name:</p>
+        <p><input type="text" name="categoryname"></p>
+        <button type="submit"class="btn btn-success">Add</button>
+    </form>
+    <div class="product-list">
+    <table class="table">
+        <thead>
+        <tr class="table-secondary">
+            <th>ID</th>
+            <th>CategoryName</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cates : ${list}">
+                <td th:text="${cates.id}"></td>
+                <td th:text="${cates.categoryName}"></td>
+                <td>
+                    <a th:href="@{/editCate/{id}(id=${cates.id})}" class="btn btn-success">Edit</a>
+                    <a th:href="@{/delete?id={id}(id=${cates.id})}" class="btn btn-danger">Delete</a>
+                </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<div th:replace="~{/admin/layout/footer:: footer}"></div>
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE -->
+<script th:src="@{/admin/dist/js/adminlte.js}"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script th:src="@{/admin/plugins/chart.js/Chart.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/admin/dist/js/demo.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script th:src="@{/admin/dist/js/pages/dashboard3.js}"></script>
+</body>
+</html>

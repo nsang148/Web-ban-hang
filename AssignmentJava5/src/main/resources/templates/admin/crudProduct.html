@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE | CRUD </title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" th:href="@{/admin/plugins/fontawesome-free/css/all.min.css}">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/admin/dist/css/adminlte.min.css}">
+</head>
+<body>
+<div th:replace="~{/admin/layout/header:: wrapper}"></div>
+<div class="content">
+
+    <form th:action="@{savePro}" method="post">
+        <p>Product name:</p>
+        <p><input type="text" name="productName"></p>
+        <p>Product image:</p>
+        <p><input type="file" name="productImage"></p>
+        <p>Product price:</p>
+        <p><input type="number" name="price"></p>
+        <p>Quantity:</p>
+        <p><input type="number" name="quatity" min="0" step="1" class="c-input-text qty text"></p>
+        <p>Description:</p>
+        <p><textarea type="text" name="description" rows="4" placeholder="Description"
+                     class="form-control col-4"></textarea></p>
+        <button type="submit"class="btn btn-success">Add</button>
+    </form>
+    <div class="product-list">
+        <table class="table">
+            <thead>
+            <tr class="table-secondary">
+                <th>ID</th>
+                <th>Product name</th>
+                <th>Product image</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${productList}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.productName}"></td>
+                <td ><img width="50px" height="50px" th:src="${'/user/images/' + product.productImage}"></td>
+                <td th:text="${product.quatity}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.description}"></td>
+                <td>
+                    <a th:href="@{/editPro/{id}(id=${product.id})}" class="btn btn-success">Edit</a>
+                    <a th:href="@{/deletePro?id={id}(id=${product.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<div th:replace="~{/admin/layout/footer:: footer}"></div>
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE -->
+<script th:src="@{/admin/dist/js/adminlte.js}"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script th:src="@{/admin/plugins/chart.js/Chart.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/admin/dist/js/demo.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script th:src="@{/admin/dist/js/pages/dashboard3.js}"></script>
+</body>
+</html>
